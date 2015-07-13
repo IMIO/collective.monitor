@@ -1,0 +1,13 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="collective.monitor">
+
+    <include package="five.z2monitor"/>
+
+    <include package="munin.zope"/>
+    <include package="Products.ZNagios" file="zcmonitor.zcml"/>
+    <include package="zc.z3monitor" />
+    <include package="ztfy.monitor" />
+    <include package="zc.monitorcache"/>
+    <include package="zc.monitorlogstats"/>
+
+</configure>

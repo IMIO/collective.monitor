@@ -1,0 +1,12 @@
+*.pyc
+lib
+bin
+include
+local
+parts
+devel
+var
+*.egg-info
+develop-eggs
+.mr.developer.cfg
+.installed.cfg

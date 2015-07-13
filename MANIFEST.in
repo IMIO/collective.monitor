@@ -1,0 +1,4 @@
+include *.cfg *.rst *.in *.py
+include Makefile
+recursive-include docs LICENSE.*
+graft collective
