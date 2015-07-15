@@ -2,6 +2,7 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="collective.monitor">
 
+
     <include package="five.z2monitor"/>
 
     <include package="munin.zope"/>
@@ -17,4 +18,27 @@
         name="count_users"
         />
 
+    <utility
+        component=".monitor.count_valid_users"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="count_valid_users"
+        />
+
+    <utility
+        component=".monitor.last_login_time"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="last_login_time"
+        />
+
+    <utility
+        component=".monitor.check_smtp"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="check_smtp"
+        />
+
+    <utility
+        component=".monitor.check_upgrade_steps"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="check_upgrade_steps"
+        />
 </configure>
