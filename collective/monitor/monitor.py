@@ -90,7 +90,7 @@ def last_login_time(connection, plone_path=None):
 
 
 def check_smtp(connection, plone_path=None):
-    """Check if SMTP is initialize"""
+    """Check if SMTP is initialize, return number of errors found. """
     plone_site = get_plone_site(connection, plone_path)
     if plone_site:
         setSite(plone_site)
@@ -111,7 +111,7 @@ def check_smtp(connection, plone_path=None):
             mail_errors.append("password entered")
         if not plone_site.email_from_address or plone_site.email_from_address == "postmaster@localhost":
             mail_errors.append("bad mail")
-        connection.write(str(", ".join(mail_errors)))
+        connection.write(str(len(mail_errors)))
 
 
 def check_upgrade_steps(connection, plone_path=None):
