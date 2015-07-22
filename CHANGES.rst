@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.2 (unreleased)
-----------------
+0.1.1 (2015-07-22)
+------------------
 
 - Return number of smtp errors found.
   [bsuttor]
