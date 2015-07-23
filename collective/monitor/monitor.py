@@ -132,3 +132,12 @@ def check_upgrade_steps(connection, plone_path=None):
                     not_upgraded += 1
 
         connection.write(str(not_upgraded))
+
+
+def creation_date_plonesite(connection, plone_path=None):
+    """Get creation date of plonesite object"""
+    plone_site = get_plone_site(connection, plone_path)
+    if plone_site:
+        setSite(plone_site)
+        creation_date = plone_site.creation_date.Date()
+    connection.write(str(creation_date))

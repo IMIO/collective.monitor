@@ -41,4 +41,10 @@
         provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
         name="check_upgrade_steps"
         />
+
+    <utility
+        component=".monitor.creation_date_plonesite"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="creation_date_plonesite"
+        />
 </configure>
