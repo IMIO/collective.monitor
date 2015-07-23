@@ -4,7 +4,8 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add creation_date_plonesite probe
+  [bsuttor]
 
 
 0.1.1 (2015-07-22)
