@@ -4,6 +4,9 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
+- Date probe are not more in stats probe (from Products.ZNagios).
+  [bsuttor]
+
 - Add creation_date_plonesite probe
   [bsuttor]
 
