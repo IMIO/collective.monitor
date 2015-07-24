@@ -47,4 +47,5 @@
         provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
         name="creation_date_plonesite"
         />
+
 </configure>

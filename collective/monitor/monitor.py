@@ -74,21 +74,6 @@ def count_valid_users(connection, plone_path=None):
         connection.write(str(len(valid_users)))
 
 
-def last_login_time(connection, plone_path=None):
-    """Get last login time user"""
-    plone_site = get_plone_site(connection, plone_path)
-    if plone_site:
-        setSite(plone_site)
-        users = get_users(plone_site)
-        last_login = ""
-        for user in users:
-            if not last_login:
-                last_login = user.getProperty("last_login_time")
-            if user.getProperty("last_login_time") > last_login:
-                last_login = user.getProperty("last_login_time")
-        connection.write(str(last_login))
-
-
 def check_smtp(connection, plone_path=None):
     """Check if SMTP is initialize, return number of errors found. """
     plone_site = get_plone_site(connection, plone_path)
@@ -134,10 +119,25 @@ def check_upgrade_steps(connection, plone_path=None):
         connection.write(str(not_upgraded))
 
 
-def creation_date_plonesite(connection, plone_path=None):
+def last_login_time(conn, plone_path=None):
+    """Get last login time user"""
+    plone_site = get_plone_site(conn, plone_path)
+    if plone_site:
+        setSite(plone_site)
+        users = get_users(plone_site)
+        last_login = ""
+        for user in users:
+            if not last_login:
+                last_login = user.getProperty("last_login_time")
+            if user.getProperty("last_login_time") > last_login:
+                last_login = user.getProperty("last_login_time")
+        conn.write(str(last_login))
+
+
+def creation_date_plonesite(conn, plone_path=None):
     """Get creation date of plonesite object"""
-    plone_site = get_plone_site(connection, plone_path)
+    plone_site = get_plone_site(conn, plone_path)
     if plone_site:
         setSite(plone_site)
         creation_date = plone_site.creation_date.Date()
-    connection.write(str(creation_date))
+    conn.write(str(creation_date))
