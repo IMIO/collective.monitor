@@ -4,7 +4,17 @@ Changelog
 0.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add a probe (dates) which return all probes date.
+  [bsuttor]
+
+- Add last_login_time porbe.
+  [bsuttor]
+
+- Add last_modified_plone_object_time probe.
+  [bsuttor]
+
+- Add last_modified_zope_object_time probe.
+  [bsuttor]
 
 
 0.1.2 (2015-07-24)
