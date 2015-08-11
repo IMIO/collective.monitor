@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.3 (unreleased)
+0.2.0 (2015-08-11)
 ------------------
 
 - Add a probe (dates) which return all probes date.
