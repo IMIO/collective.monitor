@@ -25,12 +25,6 @@
         />
 
     <utility
-        component=".monitor.last_login_time"
-        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
-        name="last_login_time"
-        />
-
-    <utility
         component=".monitor.check_smtp"
         provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
         name="check_smtp"
@@ -46,6 +40,30 @@
         component=".monitor.creation_date_plonesite"
         provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
         name="creation_date_plonesite"
+        />
+
+    <utility
+        component=".monitor.last_login_time"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="last_login_time"
+        />
+
+    <utility
+        component=".monitor.last_modified_plone_object_time"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="last_modified_plone_object_time"
+        />
+
+    <utility
+        component=".monitor.last_modified_zope_object_time"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="last_modified_zope_object_time"
+        />
+
+    <utility
+        component=".monitor.dates"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="dates"
         />
 
 </configure>
