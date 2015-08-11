@@ -31,6 +31,7 @@ Probes
 ======
 
 Currently supported probes:
+
 - cache_size -- cache sizes informations
 - check_smtp -- Check if SMTP is initialize, return number of errors found. 
 - check_upgrade_steps -- Check if all upgrade steps are ran.
