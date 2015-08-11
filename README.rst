@@ -10,30 +10,50 @@ Use zc.monitor and additional plugins to fetch probes via another thread than th
 
 Once the instance is running zc.monitor thread listen to another port (127.0.0.1:8888 in this buildout). You can query values using simple python script or nc.
 
-Example:
+Example::
 
-  echo 'uptime' | nc -i 1 localhost 8888
+    echo 'uptime' | nc -i 1 localhost 8888
 
 
-Or (when instance is up):
+Or (when instance is up)::
 
     bin/instance monitor stats
+
+Or::
+
+    telnet 127.0.0.1 8888
+
+    dbsize
+
 
 
 Probes
 ======
 
 Currently supported probes:
-
 - cache_size -- cache sizes informations
+- check_smtp -- Check if SMTP is initialize, return number of errors found. 
+- check_upgrade_steps -- Check if all upgrade steps are ran.
 - conflictcount -- number of all conflict errors since startup
+- count_users -- the total amount of users in your plone site
+- count_valid_users -- Count all users connected since 90 days
+- cpu_times -- ?
+- creation_date_plonesite -- Get creation date of plonesite object
+- dates -- Return all date probes
 - dbactivity -- number of load, store and connections on database (default=main) for the last x minutes (default=5)
-- dbinfo [main] -- Get database statistics (number of database loads, number of database stores, number of connections, number of active/inactive objects in all object caches, number of active objects in the object caches)
+- dbinfo -- Get database statistics
 - dbsize -- size of the database (default=main) in bytes
 - errorcount -- number of error present in error_log (default in the root).
 - help -- Get help about server commands
-- monitor -- Get general process info (number of opened database connections, virtual memory size, resident memory size)
-- objectcount -- number of objects in the database (default=main)
+- interactive -- Turn on monitor's interactive mode
+- last_login_time -- Get last login time user
+- last_modified_plone_object_time -- Get last modified plone object time
+- last_modified_zope_object_time -- Get last modified zope object time
+- logstats -- ?
+- memory_percent -- ?
+- monitor -- Get general process info
+- objectcount -- number of object in the database (default=main)
+- quit -- Quit the monitor
 - refcount -- the total amount of object reference counts
 - requestqueue_size -- number of requests waiting in the queue to be handled by zope threads
 - stats -- Stats of all information Products.ZNagios know
@@ -42,7 +62,6 @@ Currently supported probes:
 - uptime -- uptime of the zope instance in seconds
 - zeocache -- Get ZEO client cache statistics
 - zeostatus -- Get ZEO client status information
-
 
 How it works
 ============
@@ -57,10 +76,12 @@ This package use differents package
 - zc.monitorlogstats:
 - ztfy.monitor:
 
-
 Add lines on your buildout::
 
-    <product-config five.z2monitor>
+    [instance]
+    ...
+    zope-conf-additional =
+      <product-config five.z2monitor>
         bind 127.0.0.1:8888
-    </product-config>
+      </product-config>
 
