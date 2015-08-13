@@ -4,7 +4,8 @@ Changelog
 0.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Return date in ISO format
+  [bsuttor]
 
 
 0.2.0 (2015-08-11)
