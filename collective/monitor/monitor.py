@@ -24,12 +24,12 @@ def get_plone_site(connection, plone_path=None):
         if not plone_site:
             msg = "Error, path '{0}' do not exist".format(plone_path)
             connection.write(str(msg))
-            app._p_jar.close()
+            container._p_jar.close()
             return False
         if plone_site.meta_type != "Plone Site":
             msg = "Error, path {0} is not a plone site, it's {1}".format(plone_path, plone_site.meta_type)
             connection.write(str(msg))
-            app._p_jar.close()
+            container._p_jar.close()
             return False
         else:
             return container, plone_site
