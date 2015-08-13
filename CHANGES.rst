@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.1 (unreleased)
+0.2.1 (2015-08-13)
 ------------------
 
 - Return date in ISO format
