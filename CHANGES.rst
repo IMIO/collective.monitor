@@ -4,7 +4,8 @@ Changelog
 0.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix error if last_login is empty.
+  [bsuttor]
 
 
 0.2.1 (2015-08-13)
