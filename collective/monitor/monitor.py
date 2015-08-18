@@ -153,6 +153,8 @@ def last_login_time(dconnection, plone_path=None):
                 last_login = user.getProperty("last_login_time")
             if user.getProperty("last_login_time") > last_login:
                 last_login = user.getProperty("last_login_time")
+        if not last_login:
+            last_login = plone_site.creation_date
         dconnection.write(str(last_login.ISO()))
     app._p_jar.close()
 
