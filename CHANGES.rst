@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.2 (unreleased)
+0.2.2 (2015-08-18)
 ------------------
 
 - Fix error if last_login is empty.
