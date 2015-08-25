@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.3 (unreleased)
+0.2.3 (2015-08-25)
 ------------------
 
 - Return unix_time by default, you can still get ISO time with call parameters False.
