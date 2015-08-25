@@ -130,18 +130,20 @@ def check_upgrade_steps(connection, plone_path=None):
     app._p_jar.close()
 
 
-def creation_date_plonesite(dconnection, plone_path=None):
+def creation_date_plonesite(dconnection, unix_time=True, plone_path=None):
     """Get creation date of plonesite object"""
     app, plone_site = get_plone_site(dconnection, plone_path)
     if plone_site:
         setSite(plone_site)
         creation_date = plone_site.creation_date
-        # creation_date.Date() if you want a yyyy/mm/dd format
-        dconnection.write(str(creation_date.ISO()))
+        if str2bool(unix_time):
+            dconnection.write(str(creation_date.timeTime()))
+        else:
+            dconnection.write(str(creation_date.ISO()))
     app._p_jar.close()
 
 
-def last_login_time(dconnection, plone_path=None):
+def last_login_time(dconnection, unix_time=True, plone_path=None):
     """Get last login time user"""
     app, plone_site = get_plone_site(dconnection, plone_path)
     if plone_site:
@@ -155,11 +157,14 @@ def last_login_time(dconnection, plone_path=None):
                 last_login = user.getProperty("last_login_time")
         if not last_login:
             last_login = plone_site.creation_date
-        dconnection.write(str(last_login.ISO()))
+        if str2bool(unix_time):
+            dconnection.write(str(last_login.timeTime()))
+        else:
+            dconnection.write(str(last_login.ISO()))
     app._p_jar.close()
 
 
-def last_modified_plone_object_time(dconnection, plone_path=None):
+def last_modified_plone_object_time(dconnection, unix_time=True, plone_path=None):
     """Get last modified plone object time"""
     app, plone_site = get_plone_site(dconnection, plone_path)
     if plone_site:
@@ -171,11 +176,14 @@ def last_modified_plone_object_time(dconnection, plone_path=None):
         query['sort_order'] = 'reverse'
         query['sort_limit'] = 1
         brain = pc(query)[0]
-        dconnection.write(str(brain.modified.ISO()))
+        if str2bool(unix_time):
+            dconnection.write(str(brain.modified.timeTime()))
+        else:
+            dconnection.write(str(brain.modified.ISO()))
     app._p_jar.close()
 
 
-def last_modified_zope_object_time(dconnection, plone_path=None):
+def last_modified_zope_object_time(dconnection, unix_time=True, plone_path=None):
     """Get last modified zope object time"""
     from zope.globalrequest import setRequest
     from Testing import makerequest
@@ -188,7 +196,10 @@ def last_modified_zope_object_time(dconnection, plone_path=None):
     undoable_transactions = container.undoable_transactions()
     if len(undoable_transactions) > 1:
         last_modified = undoable_transactions[0]['time']
-        dconnection.write(str(last_modified.ISO()))
+        if str2bool(unix_time):
+            dconnection.write(str(last_modified.timeTime()))
+        else:
+            dconnection.write(str(last_modified.ISO()))
     app._p_jar.close()
 
 
@@ -206,3 +217,9 @@ def dates(dconnection, plone_path=None):
         tempStream = StringIO()
         probe(tempStream)
         beautify_return_values(dconnection, tempStream, name)
+
+
+def str2bool(v):
+    if bool(v):
+        return v
+    return v.lower() in ("yes", "true", "t", "1")
