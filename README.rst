@@ -39,7 +39,7 @@ Currently supported probes:
 - count_users -- the total amount of users in your plone site
 - count_valid_users -- Count all users connected since 90 days
 - cpu_times -- ?
-- creation_date_plonesite -- Get creation date of plonesite object
+- creation_date_plonesite -- Get creation date of plonesite object. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
 - dates -- Return all date probes
 - dbactivity -- number of load, store and connections on database (default=main) for the last x minutes (default=5)
 - dbinfo -- Get database statistics
@@ -47,9 +47,9 @@ Currently supported probes:
 - errorcount -- number of error present in error_log (default in the root).
 - help -- Get help about server commands
 - interactive -- Turn on monitor's interactive mode
-- last_login_time -- Get last login time user
-- last_modified_plone_object_time -- Get last modified plone object time
-- last_modified_zope_object_time -- Get last modified zope object time
+- last_login_time -- Get last login time user. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
+- last_modified_plone_object_time -- Get last modified plone object time. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
+- last_modified_zope_object_time -- Get last modified zope object time. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
 - logstats -- ?
 - memory_percent -- ?
 - monitor -- Get general process info
