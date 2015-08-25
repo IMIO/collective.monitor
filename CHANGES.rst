@@ -4,7 +4,8 @@ Changelog
 0.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Return unix_time by default, you can still get ISO time with call parameters False.
+  [bsuttor]
 
 
 0.2.2 (2015-08-18)
