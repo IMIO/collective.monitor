@@ -66,4 +66,10 @@
         name="dates"
         />
 
+    <utility
+        component=".monitor.eggs"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="eggs"
+        />
+
 </configure>

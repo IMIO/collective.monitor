@@ -3,6 +3,7 @@ from cStringIO import StringIO
 from DateTime import DateTime
 from Products.MailHost.interfaces import IMailHost
 from Products.ZNagios.zcmonitor import beautify_return_values
+import pkg_resources
 from zc.z3monitor.interfaces import IZ3MonitorPlugin
 from zope.component import getUtility, getUtilitiesFor
 from zope.component.hooks import setSite
@@ -10,6 +11,7 @@ from zope.component.interfaces import ComponentLookupError
 from Zope2 import app as App
 import inspect
 import os
+from Products.GenericSetup import EXTENSION
 
 
 def get_plone_site(connection, plone_path=None):
@@ -223,3 +225,58 @@ def str2bool(v):
     if bool(v):
         return v
     return v.lower() in ("yes", "true", "t", "1")
+
+
+def eggs(econnection, plone_path=None):
+    """
+    return a list with all eggs installed ant it version
+    TODO improve check if egg is a plone egg.
+    """
+    app, plone_site = get_plone_site(econnection, plone_path)
+    if plone_site:
+        setSite(plone_site)
+        qi = getattr(plone_site, 'portal_quickinstaller')
+        ps = getattr(plone_site, 'portal_setup')
+        from Products.CMFPlone.interfaces import IPloneSiteRoot
+        profiles = ps.listProfileInfo(IPloneSiteRoot)
+        # profiles = ps.listProfileInfo()
+
+        products = set([prof['product'] for prof in profiles])
+
+        # from Products.CMFPlone.interfaces import INonInstallable
+        # from zope.component import getAllUtilitiesRegisteredFor
+        # non_installable_non_flatten = [profile.getNonInstallableProfiles() for profile in getAllUtilitiesRegisteredFor(INonInstallable)]
+        # non_installable = [item for sublist in non_installable_non_flatten for item in sublist]
+
+        packages_installed = [pack['id'] for pack in qi.listInstalledProducts()]
+        eggs = []
+        pkg_list = pkg_resources.Environment()
+        for pkg_name in pkg_list:
+            pkg = pkg_resources.Environment()[pkg_name]
+            if len(pkg) == 1:
+                egg = {}
+                egg['name'] = pkg[0].project_name
+                egg['version'] = pkg[0].version
+            else:
+                # mutliple version of this package installed
+                versions = []
+                for p in pkg:
+                    egg = {}
+                    egg['name'] = p.project_name
+                    versions.append(p.version)
+                egg['version'] = versions
+
+            if egg['name'] in packages_installed:
+                egg['installed'] = True
+            else:
+                egg['installed'] = False
+
+            if egg['name'] in products:
+                egg['plone'] = True
+            else:
+                egg['plone'] = False
+
+            eggs.append(egg)
+            
+        econnection.write(str(eggs))
+    app._p_jar.close()
