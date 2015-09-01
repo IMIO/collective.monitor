@@ -4,7 +4,8 @@ Changelog
 0.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add eggs probe.
+  [bsuttor]
 
 
 0.2.3 (2015-08-25)
