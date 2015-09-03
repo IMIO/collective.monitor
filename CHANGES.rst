@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.4 (unreleased)
+0.2.4 (2015-09-03)
 ------------------
 
 - Add eggs probe.
