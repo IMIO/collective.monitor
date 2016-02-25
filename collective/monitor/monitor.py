@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-from cStringIO import StringIO
 from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
 from Products.MailHost.interfaces import IMailHost
 from Products.ZNagios.zcmonitor import beautify_return_values
-import pkg_resources
+from Zope2 import app as App
+from cStringIO import StringIO
 from zc.z3monitor.interfaces import IZ3MonitorPlugin
 from zope.component import getUtility, getUtilitiesFor
 from zope.component.hooks import setSite
 from zope.component.interfaces import ComponentLookupError
-from Zope2 import app as App
-import inspect
+
 import os
-from Products.GenericSetup import EXTENSION
+import pkg_resources
 
 
 def get_plone_site(connection, plone_path=None):
-    """ Return plone site """
+    """Return plone site."""
     container = App()
     # app = container.unrestrictedTraverse('/')
     if plone_path:
@@ -28,7 +28,7 @@ def get_plone_site(connection, plone_path=None):
             connection.write(str(msg))
             container._p_jar.close()
             return False
-        if plone_site.meta_type != "Plone Site":
+        if plone_site.meta_type != 'Plone Site':
             msg = "Error, path {0} is not a plone site, it's {1}".format(plone_path, plone_site.meta_type)
             connection.write(str(msg))
             container._p_jar.close()
@@ -38,19 +38,18 @@ def get_plone_site(connection, plone_path=None):
     else:
         result = False
         for obj in container.values():
-            if obj.meta_type == "Folder":  # if plonesite come from mount point
+            if obj.meta_type == 'Folder':  # if plonesite come from mount point
                 for plone in obj.values():
-                    if plone.meta_type == "Plone Site":
+                    if plone.meta_type == 'Plone Site':
                         result = plone
             else:
-                if obj.meta_type == "Plone Site" and not result:
+                if obj.meta_type == 'Plone Site' and not result:
                     result = obj
         return container, result
 
 
 def get_users(context, obj=True):
-    from Products.CMFCore.utils import getToolByName
-    portal = getToolByName(context, "portal_url").getPortalObject()
+    portal = getToolByName(context, 'portal_url').getPortalObject()
     users = []
     for user in portal.acl_users.searchUsers():
         if user['pluginid'] == 'source_users':
@@ -79,34 +78,34 @@ def count_valid_users(connection, plone_path=None):
         users = get_users(plone_site)
         valid_users = []
         for user in users:
-            if user.getProperty("last_login_time") > (DateTime() - 90):
+            if user.getProperty('last_login_time') > (DateTime() - 90):
                 valid_users.append(user)
         connection.write(str(len(valid_users)))
         app._p_jar.close()
 
 
 def check_smtp(connection, plone_path=None):
-    """Check if SMTP is initialize, return number of errors found. """
+    """Check if SMTP is initialize, return number of errors found."""
     app, plone_site = get_plone_site(connection, plone_path)
     if plone_site:
         setSite(plone_site)
         try:
             mail_host = getUtility(IMailHost)
         except ComponentLookupError:
-            mail_host = getattr(plone_site, "MailHost")
+            mail_host = getattr(plone_site, 'MailHost')
         mail_errors = []
         if not mail_host.smtp_host:
-            mail_errors.append("incorrect host: {0}".format(mail_host.smtp_host))
+            mail_errors.append('incorrect host: {0}'.format(mail_host.smtp_host))
         if mail_host.smtp_port != 25:
-            mail_errors.append("incorrect port")
-        if (hasattr(mail_host, "smtp_userid") and mail_host.smtp_userid) or (
-                hasattr(mail_host, "smtp_uid") and mail_host.smtp_uid):
-            mail_errors.append("user entered")
-        if (hasattr(mail_host, "smtp_pass") and mail_host.smtp_pass) or (
-                hasattr(mail_host, "smtp_pwd") and mail_host.smtp_pwd):
-            mail_errors.append("password entered")
-        if not plone_site.email_from_address or plone_site.email_from_address == "postmaster@localhost":
-            mail_errors.append("bad mail")
+            mail_errors.append('incorrect port')
+        if (getattr(mail_host, 'smtp_userid', None) and mail_host.smtp_userid) or (
+                getattr(mail_host, 'smtp_uid', None) and mail_host.smtp_uid):
+            mail_errors.append('user entered')
+        if (getattr(mail_host, 'smtp_pass', None) and mail_host.smtp_pass) or (
+                getattr(mail_host, 'smtp_pwd', None) and mail_host.smtp_pwd):
+            mail_errors.append('password entered')
+        if not plone_site.email_from_address or plone_site.email_from_address == 'postmaster@localhost':
+            mail_errors.append('bad mail')
         connection.write(str(len(mail_errors)))
         app._p_jar.close()
 
@@ -133,7 +132,7 @@ def check_upgrade_steps(connection, plone_path=None):
 
 
 def creation_date_plonesite(dconnection, unix_time=True, plone_path=None):
-    """Get creation date of plonesite object"""
+    """Get creation date of plonesite object."""
     app, plone_site = get_plone_site(dconnection, plone_path)
     if plone_site:
         setSite(plone_site)
@@ -146,7 +145,7 @@ def creation_date_plonesite(dconnection, unix_time=True, plone_path=None):
 
 
 def last_login_time(dconnection, unix_time=True, plone_path=None):
-    """Get last login time user"""
+    """Get last login time user."""
     app, plone_site = get_plone_site(dconnection, plone_path)
     if plone_site:
         setSite(plone_site)
@@ -167,7 +166,7 @@ def last_login_time(dconnection, unix_time=True, plone_path=None):
 
 
 def last_modified_plone_object_time(dconnection, unix_time=True, plone_path=None):
-    """Get last modified plone object time"""
+    """Get last modified plone object time."""
     app, plone_site = get_plone_site(dconnection, plone_path)
     if plone_site:
         setSite(plone_site)
@@ -186,7 +185,7 @@ def last_modified_plone_object_time(dconnection, unix_time=True, plone_path=None
 
 
 def last_modified_zope_object_time(dconnection, unix_time=True, plone_path=None):
-    """Get last modified zope object time"""
+    """Get last modified zope object time."""
     from zope.globalrequest import setRequest
     from Testing import makerequest
     app = App()
@@ -206,7 +205,7 @@ def last_modified_zope_object_time(dconnection, unix_time=True, plone_path=None)
 
 
 def dates(dconnection, plone_path=None):
-    """Return all date probes"""
+    """Return all date probes."""
     date_probes = [
         'creation_date_plonesite',
         'last_login_time',
@@ -224,13 +223,13 @@ def dates(dconnection, plone_path=None):
 def str2bool(v):
     if bool(v):
         return v
-    return v.lower() in ("yes", "true", "t", "1")
+    return v.lower() in ('yes', 'true', 't', '1')
 
 
 def eggs(econnection, plone_path=None):
     """
     return a list with all eggs installed ant it version
-    TODO improve check if egg is a plone egg.
+    XXX improve check if egg is a plone egg.
     """
     app, plone_site = get_plone_site(econnection, plone_path)
     if plone_site:
@@ -277,6 +276,6 @@ def eggs(econnection, plone_path=None):
                 egg['plone'] = False
 
             eggs.append(egg)
-            
+
         econnection.write(str(eggs))
     app._p_jar.close()
