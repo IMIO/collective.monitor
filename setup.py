@@ -43,5 +43,4 @@ setup(name='collective.monitor',
           'zc.z3monitor',
           'zc.monitorcache',
           'zc.monitorlogstats',
-          'ztfy.monitor'
       ])

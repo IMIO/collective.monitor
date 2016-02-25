@@ -8,9 +8,14 @@
     <include package="munin.zope"/>
     <include package="Products.ZNagios" file="zcmonitor.zcml"/>
     <include package="zc.z3monitor" />
-    <include package="ztfy.monitor" />
     <include package="zc.monitorcache"/>
     <include package="zc.monitorlogstats"/>
+
+    <utility
+        component=".threads.threads"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="threads" 
+        />
 
     <utility
         component=".monitor.count_users"
