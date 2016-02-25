@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.5 (unreleased)
+0.2.5 (2016-02-25)
 ------------------
 
 - Remove old threadframe dependency package.
