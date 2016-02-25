@@ -69,13 +69,12 @@ How it works
 
 This package use differents package
 
-- five.z2monitor:
-- Products.ZNagios: 
-- munin.zope:
-- zc.z3monitor:
-- zc.monitorcache:
-- zc.monitorlogstats:
-- ztfy.monitor:
+- five.z2monitor
+- Products.ZNagios 
+- munin.zope
+- zc.z3monitor
+- zc.monitorcache
+- zc.monitorlogstats
 
 Add lines on your buildout::
 
