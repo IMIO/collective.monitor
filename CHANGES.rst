@@ -4,7 +4,8 @@ Changelog
 0.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add probes for load balancer health-checks
+  [fRiSi]
 
 
 0.2.5 (2016-02-25)

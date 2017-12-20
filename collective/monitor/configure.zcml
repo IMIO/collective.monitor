@@ -14,7 +14,7 @@
     <utility
         component=".threads.threads"
         provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
-        name="threads" 
+        name="threads"
         />
 
     <utility
@@ -77,4 +77,15 @@
         name="eggs"
         />
 
+    <utility
+        component=".health.ok"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="health_ok"
+        />
+
+    <utility
+        component=".health.db_connected"
+        provides="zc.z3monitor.interfaces.IZ3MonitorPlugin"
+        name="health_db_connected"
+        />
 </configure>
