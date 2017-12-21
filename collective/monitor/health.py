@@ -2,8 +2,7 @@ from Zope2 import app as App
 
 
 def ok(connection):
-    """Very simple probe that returns the string 'OK'.
-    can be used for health checks in load-balancers
+    """fast health check for load balancers that simply returns 'OK'
     """
     connection.write('OK\n')
 

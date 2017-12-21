@@ -46,7 +46,7 @@ Currently supported probes:
 - dbsize -- size of the database (default=main) in bytes
 - errorcount -- number of error present in error_log (default in the root).
 - health_ok -- fast health check for load balancers that simply returns 'OK'
-- health_db_connected  -- returns the string 'OK' if database is connected. (default=main)
+- health_db_connected  -- returns the string 'OK' if database (default=main) is connected.
 - help -- Get help about server commands
 - interactive -- Turn on monitor's interactive mode
 - last_login_time -- Get last login time user. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
