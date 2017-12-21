@@ -33,7 +33,7 @@ Probes
 Currently supported probes:
 
 - cache_size -- cache sizes informations
-- check_smtp -- Check if SMTP is initialize, return number of errors found. 
+- check_smtp -- Check if SMTP is initialize, return number of errors found.
 - check_upgrade_steps -- Check if all upgrade steps are ran.
 - conflictcount -- number of all conflict errors since startup
 - count_users -- the total amount of users in your plone site
@@ -45,6 +45,8 @@ Currently supported probes:
 - dbinfo -- Get database statistics
 - dbsize -- size of the database (default=main) in bytes
 - errorcount -- number of error present in error_log (default in the root).
+- health_ok -- fast health check for load balancers that simply returns 'OK'
+- health_db_connected  -- returns the string 'OK' if database (default=main) is connected.
 - help -- Get help about server commands
 - interactive -- Turn on monitor's interactive mode
 - last_login_time -- Get last login time user. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
@@ -70,7 +72,7 @@ How it works
 This package use differents package
 
 - five.z2monitor
-- Products.ZNagios 
+- Products.ZNagios
 - munin.zope
 - zc.z3monitor
 - zc.monitorcache
