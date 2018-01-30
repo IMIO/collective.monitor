@@ -4,7 +4,7 @@ Changelog
 0.2.6 (unreleased)
 ------------------
 
-- Add probes for load balancer health-checks
+- Add probes for load balancer health-checks (see doc/haproxy.rst for an example)
   [fRiSi]
 
 

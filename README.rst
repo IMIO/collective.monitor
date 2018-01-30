@@ -45,8 +45,8 @@ Currently supported probes:
 - dbinfo -- Get database statistics
 - dbsize -- size of the database (default=main) in bytes
 - errorcount -- number of error present in error_log (default in the root).
-- health_ok -- fast health check for load balancers that simply returns 'OK'
-- health_db_connected  -- returns the string 'OK' if database (default=main) is connected.
+- health_ok -- fast health check for load balancers that simply returns 'OK' (see doc/haproxy for usage)
+- health_db_connected  -- returns the string 'OK' if database (default=main) is connected. (see doc/haproxy for usage)
 - help -- Get help about server commands
 - interactive -- Turn on monitor's interactive mode
 - last_login_time -- Get last login time user. Default return unix_time (defaut=True) if you want ISO time call 'False' attr.
