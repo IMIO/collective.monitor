@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.6 (unreleased)
+0.2.6 (2018-01-30)
 ------------------
 
 - Add probes for load balancer health-checks (see doc/haproxy.rst for an example)
