@@ -18,3 +18,5 @@ def db_connected(connection, dbname='main'):
         connection.write('database {} is not connected\n'.format(dbname))
     except KeyError, e:
         connection.write(str(e))
+    finally:
+        app._p_jar.close()
