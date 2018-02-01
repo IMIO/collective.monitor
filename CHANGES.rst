@@ -4,7 +4,8 @@ Changelog
 0.2.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Close database connection after health check and improve haproxy documentation
+  [fRiSi]
 
 
 0.2.6 (2018-01-30)
